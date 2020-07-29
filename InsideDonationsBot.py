@@ -142,9 +142,12 @@ async def main():
             sleep(30)
             print('Pending...')
         except Exception as e:
-            print(str(e))
-            loop.stop()
-            break
+            print(e.__class__.__name__, str(e))
+            if 'ssl' in e.lower():
+                await asyncio.sleep(60)
+            else:
+                loop.stop()
+                break
 
 
 try:
