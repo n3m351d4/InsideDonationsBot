@@ -5,26 +5,26 @@ import datetime
 import asyncio
 import aiohttp
 import aiogram
+from botconfig import BotConf
 
 CURRENCIES = {'RUB': 'руб.',
               'USD': 'долл.',
               'EUR': 'евро'}
 
-ADMIN_USER_ID = ""
+ADMIN_USER_ID = BotConf.ADMIN_USER_ID
 # CHANGE! telegram channel username "@dfasfdfadfafa343", or chat ID, or user id
-BOT_ID = 123231123
+BOT_ID = BotConf.BOT_ID
 # CHANGE! from bot father, BOT_ID = 23123123123131231323
-TOKEN = ''
+TOKEN = BotConf.TOKEN
 # CHANGE! from bot father, format '12312423:Sdarf2r3resdf-Sdr3rsfsff'
-SERVER_URL = 'https://api.vk.com/blank.html'
+SERVER_URL = BotConf.SERVER_URL
 # we took this blank page, you should also specify it in here https://www.donationalerts.com/application/clients
-CLIENT_ID = 12345678
+CLIENT_ID = BotConf.CLIENT_ID
 # CHANGE!  you can get it in the DonationAlerts application
-CLIENT_SECRET = 'DUTWHQsdfdgadfgfdgsdgsdg23'
+CLIENT_SECRET = BotConf.CLIENT_SECRET
 # CHANGE!   you can get it in the DonationAlerts application
-OAUTH_URL = f'https://www.donationalerts.com/oauth/authorize?client_id={CLIENT_ID}' \
-            f'&scope=oauth-donation-index&response_type=code&redirect_uri={SERVER_URL}'
-OAUTH_TOKEN_URL = f'https://www.donationalerts.com/oauth/token'
+OAUTH_URL = BotConf.OAUTH_URL
+OAUTH_TOKEN_URL = BotConf.OAUTH_TOKEN_URL
 config = {}
 
 # You also need a looooooooooong access token "code". You will be asked for it.
@@ -143,7 +143,7 @@ async def main():
             print('Pending...')
         except Exception as e:
             print(e.__class__.__name__, str(e))
-            if 'ssl' in e.lower():
+            if 'connect' in e.lower():
                 await asyncio.sleep(60)
             else:
                 loop.stop()
